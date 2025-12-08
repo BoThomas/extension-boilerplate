@@ -2,6 +2,7 @@ import type { Person } from '../utils/ct-types';
 import type { ExtensionContext, EntryPoint, CleanupFunction } from '../types/extension';
 import { churchtoolsClient } from '@churchtools/churchtools-client';
 import { EventBus } from './event-bus';
+import manifest from '../../manifest.json';
 
 // Re-export types for convenience
 export type { ExtensionContext, EntryPoint, CleanupFunction };
@@ -18,7 +19,7 @@ declare const window: Window &
         };
     };
 
-const KEY = import.meta.env.VITE_KEY;
+const KEY = manifest.key;
 export { KEY };
 
 // Track initialization state

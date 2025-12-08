@@ -1,13 +1,25 @@
 import { defineConfig, loadEnv } from 'vite';
 import { resolve } from 'path';
-import {copyFileSync} from "fs";
+import {copyFileSync, readFileSync } from "fs";
 
 // Configuration for legacy mode (index-legacy.html)
 // This serves the main entry point directly without the test environment
 export default ({ mode }) => {
-    process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+    if (mode === 'development') {
+        // load the .env file only in development mode
+        process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+    }
 
-    const key = process.env.VITE_KEY || 'default';
+    // Read the key from manifest.json
+    let key = 'default';
+    try {
+        const manifestPath = resolve(__dirname, 'manifest.json');
+        const manifestContent = readFileSync(manifestPath, 'utf-8');
+        const manifest = JSON.parse(manifestContent);
+        key = manifest.key || 'default';
+    } catch (error) {
+        console.warn('Could not read manifest.json, will use `default` for key.');
+    }
 
     return defineConfig({
         // Use root path for legacy mode

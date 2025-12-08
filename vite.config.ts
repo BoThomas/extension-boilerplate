@@ -1,13 +1,26 @@
 import { defineConfig, loadEnv } from 'vite';
 import { resolve } from 'path';
-import { copyFileSync } from 'fs';
+import { copyFileSync, readFileSync } from 'fs';
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
-    process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+    if (mode === 'development') {
+        // load the .env file only in development mode
+        process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+    }
+
+    // Read the key from manifest.json
+    let key = 'default';
+    try {
+        const manifestPath = resolve(__dirname, 'manifest.json');
+        const manifestContent = readFileSync(manifestPath, 'utf-8');
+        const manifest = JSON.parse(manifestContent);
+        key = manifest.key || 'default';
+    } catch (error) {
+        console.warn('Could not read manifest.json, will use `default` for key.');
+    }
 
     const isDevelopment = mode === 'development';
-    const key = process.env.VITE_KEY || 'default';
     const buildMode = process.env.VITE_BUILD_MODE || 'simple';
 
     // Create a unique global name for UMD based on the extension key

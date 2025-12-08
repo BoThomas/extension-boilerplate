@@ -22,7 +22,11 @@
       "id": "main",
       "entryPoint": "main",
       "title": "Statistics Dashboard",
-      "description": "Person statistics by status"
+      "description": "Person statistics by status",
+      "permissions": [
+        "churchcal view",
+        "churchdb view"
+      ]
     },
     {
       "id": "admin",
@@ -34,12 +38,10 @@
       "id": "appointment-dialog-detail",
       "entryPoint": "appointmentDetails",
       "title": "Appointment Details",
-      "description": "Shows appointment as json in appointment dialog"
+      "description": "Shows appointment as json in appointment dialog",
+      "permissions": [
+        "churchcal view"
+      ]
     }
-  ],
-  "permissions": [
-    "churchcal view",
-    "churchdb view"
-  ],
-  "minChurchToolsVersion": "3.0.0"
+  ]
 }

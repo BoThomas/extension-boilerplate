@@ -123,11 +123,6 @@
           "description": {
             "type": "string",
             "description": "Description of what this integration provides"
-          },
-          "enabled": {
-            "type": "boolean",
-            "description": "Whether this extension point is enabled by default",
-            "default": true
           }
         }
       }
@@ -138,36 +133,14 @@
       "items": {
         "type": "string",
         "examples": [
-          "read:calendar",
-          "write:calendar",
-          "read:persons",
-          "write:persons",
-          "read:events",
-          "admin:settings"
+          "churchdb view"
         ]
       }
-    },
-    "minChurchToolsVersion": {
-      "type": "string",
-      "description": "Minimum ChurchTools version required",
-      "pattern": "^\\d+\\.\\d+\\.\\d+$"
-    },
-    "maxChurchToolsVersion": {
-      "type": "string",
-      "description": "Maximum ChurchTools version supported (optional)",
-      "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
     "settings": {
       "type": "object",
       "description": "Extension settings schema (for ChurchTools admin UI)",
       "additionalProperties": true
-    },
-    "dependencies": {
-      "type": "object",
-      "description": "External dependencies (for ChurchTools to load)",
-      "additionalProperties": {
-        "type": "string"
-      }
     }
   }
 }
