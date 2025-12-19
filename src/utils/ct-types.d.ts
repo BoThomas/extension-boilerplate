@@ -1580,6 +1580,7 @@ export type CustomModuleCreate = {
     description?: string;
     name: string;
     shorty: string;
+    inMenu: boolean;
     sortKey: number;
 };
 

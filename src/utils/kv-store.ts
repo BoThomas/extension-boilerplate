@@ -65,6 +65,7 @@ async function createModule(
         name: name,
         shorty: extensionkey,
         description: description,
+        inMenu: true,
         sortKey: 100,
     };
 
